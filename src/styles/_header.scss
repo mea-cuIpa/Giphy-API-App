@@ -1,0 +1,17 @@
+.header {
+  font-size: 1.4rem;
+
+  &__input {
+    font-size: inherit;
+  }
+
+  &__icon {
+    height: 2rem;
+    width: 2rem;
+    fill: var(--color-white);
+  }
+}
+
+.alert {
+  margin-top: -0.75rem;
+}

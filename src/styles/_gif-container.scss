@@ -1,0 +1,29 @@
+.gif-container {
+  column-count: 4;
+  column-gap: 0;
+
+  &__content {
+    break-inside: avoid;
+    padding: 0.4rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    transition: 0.3s all;
+
+    &:hover {
+      cursor: pointer;
+      filter: saturate(200%);
+      transform: scale(1.05);
+    }
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    column-count: 3;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    column-count: 2;
+  }
+}

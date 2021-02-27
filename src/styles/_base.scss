@@ -1,0 +1,37 @@
+:root {
+  --marginY: 6rem;
+  --color-white: #fff;
+}
+
+$bp-big: 62.5em;
+$bp-medium: 48em;
+$bp-small: 37.5em;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+
+  @media only screen and (max-width: $bp-medium) {
+    font-size: 50%;
+  }
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - var(--marginY));
+
+  @media only screen and (max-width: $bp-big) {
+    min-height: 100vh;
+  }
+}

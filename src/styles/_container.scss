@@ -1,0 +1,10 @@
+.container {
+  font-size: 1.5rem;
+  box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.5);
+  margin-top: var(--marginY);
+
+  @media only screen and (max-width: $bp-big) {
+    margin: 0;
+    max-width: 100%;
+  }
+}
