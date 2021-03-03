@@ -8,7 +8,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import '../styles.css';
 
 class App extends React.Component {
-  state = { gifs: [], count: 12, start: 0, inputPass: '' };
+  state = { gifs: [], count: 20, start: 0, inputPass: '' };
 
   componentDidMount() {
     this.onSearchSubmit('nature');
@@ -19,7 +19,7 @@ class App extends React.Component {
       .get('/gifs/search', {
         params: {
           q: input,
-          limit: this.state.count,
+          limit: 20,
           offset: this.state.start,
         },
       })
@@ -28,7 +28,7 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
 
-    this.setState({ inputPass: input });
+    this.state.inputPass = input;
     this.setState({ gifs: response.data.data });
   };
 
