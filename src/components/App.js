@@ -8,7 +8,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import '../styles.css';
 
 class App extends React.Component {
-  state = { gifs: [], count: 20, start: 0, inputPass: '' };
+  state = { gifs: [], count: 20, start: 0, search: '' };
 
   componentDidMount() {
     this.onSearchSubmit('nature');
@@ -20,35 +20,48 @@ class App extends React.Component {
         params: {
           q: input,
           limit: 20,
-          offset: this.state.start,
+          offset: 0,
         },
       })
       .catch(err => {
-        throw new Error(err.response);
-      })
-      .catch(err => console.log(err));
+        //err > 500 ? server side : user
+        err.response
+          ? console.error(`Server responded with status ${err.response.status}`)
+          : err.request
+          ? console.error(`Can't get response ${err.request}`)
+          : console.error(
+              `Something happened in setting up the request ${err.message}`
+            );
+      });
 
-    this.state.inputPass = input;
-    this.setState({ gifs: response.data.data });
+    this.setState({ gifs: response.data.data, search: input });
   };
 
   loadGifs = async () => {
     this.setState({ start: this.state.start + this.state.count });
+    const { start, count, search } = this.state;
 
     const response = await giphy
       .get('/gifs/search', {
         params: {
-          q: this.state.inputPass,
-          limit: this.state.count,
-          offset: this.state.start,
+          q: search,
+          limit: count,
+          offset: start,
         },
       })
       .catch(err => {
-        throw new Error(err.response);
-      })
-      .catch(err => console.log(err));
+        err.response
+          ? console.error(
+              `Server responded ${err.response.data}, ${err.response.headers} with status ${err.response.status}`
+            )
+          : err.request
+          ? console.error(`Can't get response ${err.request}`)
+          : console.error(
+              `Something happened in setting up the request ${err.message}`
+            );
+      });
 
-    this.setState({ gifs: this.state.gifs.concat(response.data.data) });
+    this.setState({ gifs: [...this.state.gifs, ...response.data.data] });
   };
 
   render() {
