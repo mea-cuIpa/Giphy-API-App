@@ -8,17 +8,19 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import '../styles.css';
 
 class App extends React.Component {
-  state = { gifs: [], count: 20, start: 0, search: '' };
+  state = { gifs: [], limit: 20, offset: 0, search: '' };
 
   componentDidMount() {
     this.onSearchSubmit('nature');
   }
 
-  onSearchSubmit = async input => {
-    const response = await giphy
+  onSearchSubmit = async search => {
+    const {
+      data: { data },
+    } = await giphy
       .get('/gifs/search', {
         params: {
-          q: input,
+          q: search,
           limit: 20,
           offset: 0,
         },
@@ -34,19 +36,21 @@ class App extends React.Component {
             );
       });
 
-    this.setState({ gifs: response.data.data, search: input });
+    this.setState({ gifs: data, search });
   };
 
   loadGifs = async () => {
-    this.setState({ start: this.state.start + this.state.count });
-    const { start, count, search } = this.state;
+    this.setState({ offset: this.state.offset + this.state.limit });
+    const { offset, limit, search, gifs } = this.state;
 
-    const response = await giphy
+    const {
+      data: { data },
+    } = await giphy
       .get('/gifs/search', {
         params: {
           q: search,
-          limit: count,
-          offset: start,
+          limit,
+          offset,
         },
       })
       .catch(err => {
@@ -61,10 +65,12 @@ class App extends React.Component {
             );
       });
 
-    this.setState({ gifs: [...this.state.gifs, ...response.data.data] });
+    this.setState({ gifs: [...gifs, ...data] });
   };
 
   render() {
+    const { gifs } = this.state;
+
     return (
       <Container className="p-0">
         <header className="bg-white d-flex justify-content-center align-items-center header">
@@ -72,11 +78,11 @@ class App extends React.Component {
         </header>
         <main className="bg-light gif-container">
           <InfiniteScroll
-            dataLength={this.state.gifs.length}
+            dataLength={gifs.length}
             next={this.loadGifs}
             hasMore={true}
           >
-            <GifList gifs={this.state.gifs} />
+            <GifList gifs={gifs} />
           </InfiniteScroll>
         </main>
       </Container>
