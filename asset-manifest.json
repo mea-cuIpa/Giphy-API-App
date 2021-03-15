@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Giphy-API-App/static/css/main.b9d2fcff.chunk.css",
-    "main.js": "/Giphy-API-App/static/js/main.c4dd1b25.chunk.js",
-    "main.js.map": "/Giphy-API-App/static/js/main.c4dd1b25.chunk.js.map",
+    "main.js": "/Giphy-API-App/static/js/main.c6c8a64f.chunk.js",
+    "main.js.map": "/Giphy-API-App/static/js/main.c6c8a64f.chunk.js.map",
     "runtime-main.js": "/Giphy-API-App/static/js/runtime-main.055c84ac.js",
     "runtime-main.js.map": "/Giphy-API-App/static/js/runtime-main.055c84ac.js.map",
     "static/css/2.150d169a.chunk.css": "/Giphy-API-App/static/css/2.150d169a.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.150d169a.chunk.css",
     "static/js/2.b802eff0.chunk.js",
     "static/css/main.b9d2fcff.chunk.css",
-    "static/js/main.c4dd1b25.chunk.js"
+    "static/js/main.c6c8a64f.chunk.js"
   ]
 }
